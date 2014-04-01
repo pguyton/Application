@@ -29,3 +29,4 @@ Application\Model\Customer:
     zip:
       type: string
       length: 5
+      
