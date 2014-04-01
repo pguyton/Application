@@ -1,6 +1,6 @@
 <?php
+
 namespace Application\Model;
-use Doctrine\Tests\ORM\Functional\EntityRepositoryTest;
 
 /**
  * Class Customer
@@ -176,15 +176,4 @@ class Customer
         return $this->zip;
     }
 
-    public function exchangeArray($data)
-    {
-        $this->id     = (isset($data['id']))     ? $data['id']     : null;
-        $this->name = (isset($data['name'])) ? $data['name'] : null;
-        $this->description  = (isset($data['description']))  ? $data['description']  : null;
-        $this->phone    = (isset($data['phone']))     ? $data['phone']     : null;
-        $this->address    = (isset($data['address']))     ? $data['address']     : null;
-        $this->city    = (isset($data['city']))     ? $data['city']     : null;
-        $this->state     = (isset($data['state']))     ? $data['state']     : null;
-        $this->zip     = (isset($data['zip']))     ? $data['zip']     : null;
-    }
 }

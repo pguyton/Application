@@ -4,8 +4,6 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use zend\Form\View;
-use Zend\Form\View\Helper;
 
 /**
  * Class Module

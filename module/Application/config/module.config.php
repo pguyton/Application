@@ -18,11 +18,16 @@ return array(
                 ),
             ),
             'customers' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/customers',
+                    'route'    => '/customers[/:action[/:id]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*',
+                    ),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
+                       '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Customers',
                         'action'        => 'index',
                     ),
@@ -55,23 +60,23 @@ return array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
             'CustomerRepository' => function(Zend\ServiceManager\ServiceManager $sm) {
-                $em = $sm->get('EntityManager');
-                $repository = new CustomerRepository($em);
-                return $repository;
-            },
+                    $em = $sm->get('EntityManager');
+                    $repository = new CustomerRepository($em);
+                    return $repository;
+                },
             'EntityManager' => function(Zend\ServiceManager\ServiceManager $sm) {
-                $config = $sm->get('Config');
+                    $config = $sm->get('Config');
 
-                $em = EntityManager::create(
-                    $config['doctrine']['params'],
-                    Setup::createYAMLMetadataConfiguration(
-                        array(realpath(__DIR__ . '/../src/Application/Mapping')),
-                        true
-                    )
-                );
+                    $em = EntityManager::create(
+                        $config['doctrine']['params'],
+                        Setup::createYAMLMetadataConfiguration(
+                            array(realpath(__DIR__ . '/../src/Application/Mapping')),
+                            true
+                        )
+                    );
 
-                return $em;
-            },
+                    return $em;
+                },
         ),
     ),
     'translator' => array(
@@ -87,16 +92,16 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
+
         ),
-        'factories' => array(
+        'factories' => [
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
             'Application\Controller\Customers' => function (Zend\Mvc\Controller\ControllerManager $cm) {
-                $customerRepository = $cm->getServiceLocator()->get('CustomerRepository');
-                return new Application\Controller\CustomersController(
-                    $customerRepository
-                );
-            },
-        ),
+                    $customerRepository = $cm->getServiceLocator()->get('CustomerRepository');
+                    return new Application\Controller\CustomersController(
+                        $customerRepository
+                    );
+                }],
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,

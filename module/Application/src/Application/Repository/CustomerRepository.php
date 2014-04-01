@@ -26,6 +26,7 @@ class CustomerRepository
 
     /**
      * Retrieve all customers in the database
+     *
      * @return array
      */
     public function getAll()
@@ -38,6 +39,7 @@ class CustomerRepository
 
     /**
      * Retrieve customer by id
+     *
      * @param $id
      * @return object
      */
@@ -47,16 +49,19 @@ class CustomerRepository
     }
 
     /**
+     * Save New Customer
+     *
      * @param Customer $customer
      */
     public function saveCustomer(Customer $customer)
     {
-       // $customer->setId(9);
         $this->entityManager->persist($customer);
         $this->entityManager->flush();
     }
 
     /**
+     * Edit Customer Information
+     *
      * @param Customer $customer
      */
     public function updateCustomer(Customer $customer, $data)
@@ -72,6 +77,8 @@ class CustomerRepository
     }
 
     /**
+     * Delete Customer
+     *
      * @param Customer $customer
      */
     public function removeCustomer(Customer $customer)
