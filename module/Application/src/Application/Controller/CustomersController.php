@@ -41,8 +41,9 @@ class CustomersController extends AbstractActionController
         $customers = $this->customerRepository->getAll();
         $form = new CustomersForm();
         $request = $this->getRequest();
-        if($request->isPost())
+        if($request->isPost()) {
             $this->redirect()->toUrl('customers/create');
+        }
         $view = new ViewModel(
             [
                 'customers' => $customers,
@@ -65,8 +66,9 @@ class CustomersController extends AbstractActionController
         $customer = $this->customerRepository->getById($id);
         $form = new CustomersForm();
         $request = $this->getRequest();
-        if($request->isPost())
+        if($request->isPost()) {
             $this->redirect()->toRoute('customers');
+        }
         $view = new ViewModel(
             [
                 'customer' => $customer,
@@ -85,6 +87,7 @@ class CustomersController extends AbstractActionController
     {
         $form = new CustomersForm();
         $customer = new Customer;
+        $form->bind($customer);
         $request = $this->getRequest();
 
         if ($request->isPost()) {
@@ -98,9 +101,7 @@ class CustomersController extends AbstractActionController
                 $this->flashMessenger()->addSuccessMessage('Customer created');
                 $this->redirect()->toRoute('customers');
             }
-        } else
-            $form->bind($customer);
-
+        }
         $view = new ViewModel(
             [
                 'form' => $form,
@@ -119,21 +120,21 @@ class CustomersController extends AbstractActionController
         $form = new CustomersForm();
         $id = $this->params()->fromRoute('id');
         $customer = $this->customerRepository->getById($id);
+        $form->bind($customer);
         $request = $this->getRequest();
 
         if ($request->isPost()) {
             $formValidator = new CustomersFormValidator();
             $form->setInputFilter($formValidator->getInputFilter());
             $form->setData($request->getPost());
+            $form->bind($customer);
 
             if ($form->isValid()) {
-                $this->customerRepository->updateCustomer($customer, $form->getObject());
+                $this->customerRepository->saveCustomer($customer);
                 $this->flashMessenger()->addSuccessMessage('Customer Updated');
                 $this->redirect()->toRoute('customers');
             }
-        } else
-            $form->bind($customer);
-
+        }
         $view = new ViewModel(
             [
                 'customer' => $customer,

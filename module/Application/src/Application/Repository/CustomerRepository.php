@@ -4,9 +4,11 @@ namespace Application\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Application\Model\Customer;
+use Application\Form\CustomersForm;
 
 /**
  * Class CustomerRepository
+ *
  * @package Application\Repository
  */
 class CustomerRepository
@@ -49,29 +51,15 @@ class CustomerRepository
     }
 
     /**
-     * Save New Customer
+     * Save Customer Data
      *
      * @param Customer $customer
      */
     public function saveCustomer(Customer $customer)
     {
+        // Check if new customer
+        if($customer->getId() == null)
         $this->entityManager->persist($customer);
-        $this->entityManager->flush();
-    }
-
-    /**
-     * Edit Customer Information
-     *
-     * @param Customer $customer
-     */
-    public function updateCustomer(Customer $customer, $data)
-    {
-
-        $hydrator = new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($this->entityManager,'Application\Model\Customer');
-
-        $data = $hydrator->extract($data);
-        $data['id'] =  $customer->getId();
-        $hydrator->hydrate($data, $customer);
 
         $this->entityManager->flush();
     }
