@@ -8,6 +8,11 @@ use Zend\Form\Form;
 use Zend\Form\View;
 use Zend\Stdlib\Hydrator;
 
+/**
+ * Class CustomersForm
+ *
+ * @package Application\Form
+ */
 class CustomersForm extends Form
 {
     /**
