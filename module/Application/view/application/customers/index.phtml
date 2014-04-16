@@ -14,24 +14,24 @@
             <th align="left">Actions</th>
         </tr>
         <?php foreach ($this->customers as $customer): ?>
-                <tr>
-                    <td>
-                            <?= $customer->getName() ?>
-                    </td>
-                    <td>
-                        <?= ($customer->getDescription()) ?>
-                    </td>
-                    <td>
-                        <a href="/customers/view/<?= $customer->getId() ?>">
-                           view </a>
+            <tr>
+                <td>
+                        <?= $customer->getName() ?>
+                </td>
+                <td>
+                    <?= ($customer->getDescription()) ?>
+                </td>
+                <td>
+                    <a href="/customers/view/<?= $customer->getId() ?>">
+                       view </a>
 
-                        <a href="/customers/update/<?= $customer->getId() ?>">
-                            update </a>
+                    <a href="/customers/update/<?= $customer->getId() ?>">
+                        update </a>
 
-                        <a href="/customers/remove/<?= $customer->getId() ?>">
-                            remove </a>
-                    </td>
-                </tr>
+                    <a href="/customers/remove/<?= $customer->getId() ?>">
+                        remove </a>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </table>
 <br>
@@ -39,4 +39,3 @@
 <?= $this->formElement($this->form->get('submit')); ?>
 <?= $this->formElementErrors($this->form->get('submit')); ?>
 </form>
-

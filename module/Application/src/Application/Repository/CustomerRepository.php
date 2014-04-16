@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Application\Model\Customer;
-use Application\Form\CustomersForm;
 
 /**
  * Class CustomerRepository
@@ -58,9 +57,9 @@ class CustomerRepository
     public function saveCustomer(Customer $customer)
     {
         // Check if new customer
-        if($customer->getId() == null)
+        if($customer->getId() == null) {
         $this->entityManager->persist($customer);
-
+        }
         $this->entityManager->flush();
     }
 

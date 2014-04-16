@@ -6,6 +6,11 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
+/**
+ * Initialize InputFilter / Validators
+ *
+ * @return InputFilter|InputFilterInterface
+ */
 class CustomersFormValidator implements InputFilterAwareInterface
 {
     protected $inputFilter;

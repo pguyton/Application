@@ -5,7 +5,9 @@
          if($element->getName() != 'id' && $element->getName() != 'csrf')
          {
             if($element->getName() != 'submit')
-                 echo $this->formLabel($element);
+            {
+                echo $this->formLabel($element);
+            }
             else {
                 echo "<br>";
                 $element->setValue('Update');
